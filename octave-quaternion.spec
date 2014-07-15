@@ -1,10 +1,9 @@
 %define	pkgname quaternion
 
 Summary:	Octave package for manipulation of quaternions
-
 Name:		octave-%{pkgname}
 Version:	1.0.0
-Release:        2
+Release:        3
 Source0:	%{pkgname}-%{version}.tar.gz
 License:	GPLv3+
 Group:		Sciences/Mathematics
@@ -15,6 +14,9 @@ BuildRequires:  octave-devel >= 3.1.0
 BuildRequires:  pkgconfig(gl)
 BuildRequires:  pkgconfig(glu)
 BuildArch:	noarch
+Requires:       octave(api) = %{octave_api}
+Requires(post): octave
+Requires(postun): octave
 
 %description
 Octave package for manipulation of quaternions used for frame transformations.
@@ -35,10 +37,13 @@ mv %{pkgname}-%{version}/DESCRIPTION .
 %clean
 
 %post
-%{_bindir}/test -x %{_bindir}/octave && %{_bindir}/octave -q -H --no-site-file --eval "pkg('rebuild');" || :
+%octave_cmd pkg rebuild
+
+%preun
+%octave_pkg_preun
 
 %postun
-%{_bindir}/test -x %{_bindir}/octave && %{_bindir}/octave -q -H --no-site-file --eval "pkg('rebuild');" || :
+%octave_cmd pkg rebuild
 
 %files
 %doc COPYING DESCRIPTION
