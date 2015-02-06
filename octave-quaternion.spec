@@ -3,7 +3,7 @@
 Summary:	Octave package for manipulation of quaternions
 Name:		octave-%{pkgname}
 Version:	1.0.0
-Release:        3
+Release:        4
 Source0:	%{pkgname}-%{version}.tar.gz
 License:	GPLv3+
 Group:		Sciences/Mathematics
