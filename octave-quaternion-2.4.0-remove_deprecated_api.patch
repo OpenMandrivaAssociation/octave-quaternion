@@ -1,0 +1,38 @@
+# HG changeset patch
+# User Markus Ebner <hiwatari.seiji@gmail.com>
+# Date 1568076880 -7200
+#      Tue Sep 10 02:54:40 2019 +0200
+# Node ID a75c84d98aa0d4edc139d4d5b2aa9bcc7c452b87
+# Parent  aa6ed971e5b366fcd8dfe98b711254a8cff29a84
+Remove use of deprecated APIs and bump Octave version requirement
+
+- is_numeric_type [removed after 5.1.0] -> isnumeric() [since 4.4]
+- is_real_type [removed after 5.1.0] -> isreal() [since 4.4]
+- is_bool_type [removed after 5.1.0] -> islogical [since 4.4]
+
+diff -r aa6ed971e5b3 -r a75c84d98aa0 DESCRIPTION
+--- a/DESCRIPTION	Thu Jan 21 11:24:08 2016 +0100
++++ b/DESCRIPTION	Tue Sep 10 02:54:40 2019 +0200
+@@ -5,7 +5,7 @@
+ Maintainer: Lukas Reichlin <lukas.reichlin@gmail.com>
+ Title: Quaternion
+ Description: Quaternion package for GNU Octave, includes a quaternion class with overloaded operators
+-Depends: octave (>= 3.8.0)
++Depends: octave (>= 4.4.0)
+ Autoload: no
+ License: GPLv3+
+ Url: http://octave.sf.net
+diff -r aa6ed971e5b3 -r a75c84d98aa0 src/is_real_array.cc
+--- a/src/is_real_array.cc	Thu Jan 21 11:24:08 2016 +0100
++++ b/src/is_real_array.cc	Tue Sep 10 02:54:40 2019 +0200
+@@ -46,8 +46,8 @@
+         {
+             // args(i).ndims () should be always >= 2
+             if (args(i).ndims () < 2
+-                || ! ((args(i).is_numeric_type () && args(i).is_real_type ())
+-                      || args(i).is_bool_type ()))
++                || ! ((args(i).isnumeric () && args(i).isreal ())
++                      || args(i).islogical ()))
+             {
+                 retval = false;
+                 break;

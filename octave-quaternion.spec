@@ -1,16 +1,14 @@
-%define octpkg quaternion
-
-# Exclude .oct files from provides
-%define __provides_exclude_from ^%{octpkglibdir}/.*.oct$
+%global octpkg quaternion
 
 Summary:	Octave package for manipulation of quaternions
 Name:		octave-%{octpkg}
 Version:	2.4.0
 Release:	1
+Url:		https://octave.sourceforge.io/%{octpkg}/
 Source0:	http://downloads.sourceforge.net/octave/%{octpkg}-%{version}.tar.gz
+Patch0:		octave-%{octpkg}-2.4.0-remove_deprecated_api.patch
 License:	GPLv3+
 Group:		Sciences/Mathematics
-Url:		https://octave.sourceforge.io/%{octpkg}/
 
 BuildRequires:	octave-devel >= 3.8.0
 
@@ -25,14 +23,31 @@ overloaded operators.
 
 This package is part of community Octave-Forge collection.
 
+%files
+%license COPYING
+%doc NEWS
+%dir %{octpkglibdir}
+%{octpkglibdir}/*
+%dir %{octpkgdir}
+%{octpkgdir}/*
+
+#---------------------------------------------------------------------------
+
 %prep
-%setup -qcT
+%autosetup -p1 -n %{octpkg}
+
+# remove backup files
+find . -name \*~ -delete
 
 %build
-%octave_pkg_build -T
+%set_build_flags
+%octave_pkg_build
 
 %install
 %octave_pkg_install
+
+%check
+%octave_pkg_check
 
 %post
 %octave_cmd pkg rebuild
@@ -42,12 +57,4 @@ This package is part of community Octave-Forge collection.
 
 %postun
 %octave_cmd pkg rebuild
-
-%files
-%dir %{octpkglibdir}
-%{octpkglibdir}/*
-%dir %{octpkgdir}
-%{octpkgdir}/*
-%doc %{octpkg}/NEWS
-%doc %{octpkg}/COPYING
 
