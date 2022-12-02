@@ -4,8 +4,8 @@ Summary:	Octave package for manipulation of quaternions
 Name:		octave-%{octpkg}
 Version:	2.4.0
 Release:	1
-Url:		https://octave.sourceforge.io/%{octpkg}/
-Source0:	http://downloads.sourceforge.net/octave/%{octpkg}-%{version}.tar.gz
+Url:		https://packages.octave.org/%{octpkg}/
+Source0:	https://downloads.sourceforge.net/octave/%{octpkg}-%{version}.tar.gz
 Patch0:		octave-%{octpkg}-2.4.0-remove_deprecated_api.patch
 License:	GPLv3+
 Group:		Sciences/Mathematics
@@ -20,8 +20,6 @@ Requires(postun): octave
 %description
 Quaternion package for GNU Octave, includes a quaternion class with
 overloaded operators.
-
-This package is part of community Octave-Forge collection.
 
 %files
 %license COPYING
