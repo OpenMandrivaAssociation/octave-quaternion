@@ -3,7 +3,7 @@
 Summary:	Octave package for manipulation of quaternions
 Name:		octave-quaternion
 Version:	2.4.0
-Release:	2
+Release:	3
 License:	GPLv3+
 Group:		Sciences/Mathematics
 Url:		https://packages.octave.org/quaternion/
