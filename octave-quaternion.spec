@@ -2,13 +2,13 @@
 
 Summary:	Octave package for manipulation of quaternions
 Name:		octave-quaternion
-Version:	2.4.0
-Release:	3
+Version:	2.4.2
+Release:	1
 License:	GPLv3+
 Group:		Sciences/Mathematics
 Url:		https://packages.octave.org/quaternion/
 Source0:	https://downloads.sourceforge.net/octave/quaternion-%{version}.tar.gz
-Patch0:		octave-quaternion-2.4.0-remove_deprecated_api.patch
+# dropped (no longer applies): Patch0:		octave-quaternion-2.4.2-remove_deprecated_api.patch
 
 BuildRequires:  octave-devel >= 3.8.0
 
@@ -33,7 +33,7 @@ overloaded operators.
 #---------------------------------------------------------------------------
 
 %prep
-%autosetup -p1 -n %{octpkg}
+%autosetup -p1 -n quaternion-2.4.2
 
 %build
 %set_build_flags
